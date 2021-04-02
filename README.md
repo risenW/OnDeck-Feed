@@ -56,7 +56,7 @@ Please submit written answers to these questions:
 
 ## How to submit
 
-1. Use a separate repo for the solution. Don't fork it, use this [guide for mirrorong repos](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/duplicating-a-repository#mirroring-a-repository).
+1. Use a separate repo for the solution. Don't fork it, use this [guide for mirroring repos](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/duplicating-a-repository#mirroring-a-repository).
 2. Create a short Loom recording of UI and code walk-through.
 3. Write the answers to the questions in a Notion or any other kind of shared doc.
 4. Send everything above via an email to your contact at On Deck.
