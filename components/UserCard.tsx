@@ -2,50 +2,47 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import Card from './Card'
 import Markdown from './Markdown'
+import { User, UserProject } from '../lib/types'
+
 
 type Props = {
   user: User;
 }
 
-type User = {
-  id: number;
-  name: string;
-  bio: string;
-  fellowship: "fellows" | "angels" | "writers";
-  avatar_url: string;
-  projects: Project[];
-}
-
-type Project = {
-  id: number;
-  name: string;
-  icon_url: string;
-}
-
-export default function UserCard({user}: Props) {
+export default function UserCard({ user }: Props) {
   return (
-    <Card>
-      <Columns>
-        <ColumnLeft>
-          <Avatar src={user.avatar_url}/>
-        </ColumnLeft>
-        <ColumnRight>
-          <h2>{user.name}</h2>
-          <p>Fellowship: {user.fellowship}</p>
-          <Markdown>{user.bio}</Markdown>
-          {!!user.projects.length && (
-            <>
-              <h3>Projects:</h3>
-              {user.projects.map(p => (
-                <Project key={p.id} project={p} />
-              ))}
-            </>
-          )}
-        </ColumnRight>
-      </Columns>
-    </Card>
+    <Link href={`/users/${user.id}`}>
+      <Card>
+        <Columns>
+          <ColumnLeft>
+            <Avatar src={user.avatar_url} />
+          </ColumnLeft>
+          <ColumnRight>
+            <h2>{user.name}</h2>
+            <p>Fellowship: {user.fellowship}</p>
+            <Markdown>{user.bio}</Markdown>
+            {user.projects && !!user.projects.length && (
+              <>
+                <h3>Projects:</h3>
+                {user.projects.map(p => (
+                  <Project key={p.id} project={p} />
+                ))}
+              </>
+            )}
+          </ColumnRight>
+          <ColumnTag>
+            <p>User</p>
+          </ColumnTag>
+        </Columns>
+      </Card>
+    </Link>
   )
 }
+
+const ColumnTag = styled.p`
+  flex-direction: row;
+  color: gray
+`
 
 const Avatar = styled.img`
   background-color: rgba(0, 0, 0, 0.1);
@@ -75,7 +72,7 @@ const ColumnRight = styled.div`
   flex-basis: 14rem;
 `
 
-function Project({project}: {project: Project}) {
+function Project({ project }: { project: UserProject }) {
   return (
     <ProjectContainer>
       <ProjectColumnLeft>

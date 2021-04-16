@@ -1,6 +1,7 @@
-import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client'
-import {createGlobalStyle, ThemeProvider} from 'styled-components'
+import { ApolloProvider } from '@apollo/client'
+import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import type { AppProps } from 'next/app'
+import client from '../lib/client'
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -14,11 +15,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     </>
   )
 }
-
-const client = new ApolloClient({
-  uri: '/api/graphql',
-  cache: new InMemoryCache(),
-})
 
 const theme = {
   colors: {

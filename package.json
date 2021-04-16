@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.3.11",
+    "@types/lodash": "^4.14.168",
     "@types/marked": "^1.2.2",
     "apollo-server-micro": "^2.21.0",
     "graphql": "^15.5.0",

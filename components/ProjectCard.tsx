@@ -2,49 +2,45 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import Card from './Card'
 import Markdown from './Markdown'
+import { Project, ProjectUser } from '../lib/types'
 
 type Props = {
   project: Project;
 }
 
-type Project = {
-  id: number;
-  name: string;
-  description: string;
-  icon_url: string;
-  users: User[];
-}
-
-type User = {
-  id: number;
-  name: string;
-  avatar_url: string;
-}
-
-export default function ProjectCard({project}: Props) {
+export default function ProjectCard({ project }: Props) {
   return (
-    <Card>
-      <Columns>
-        <ColumnLeft>
-          <Icon src={project.icon_url}/>
-        </ColumnLeft>
-        <ColumnRight>
-          <h2>{project.name}</h2>
-          <Markdown>{project.description}</Markdown>
-          {!!project.users.length && (
-            <>
-              <h3>Participants:</h3>
-              {project.users.map(u => (
-                <Participant key={u.id} user={u} />
-              ))}
-            </>
-          )}
-        </ColumnRight>
-      </Columns>
-    </Card>
+    <Link href={`/projects/${project.id}`}>
+      <Card>
+        <Columns>
+          <ColumnLeft>
+            <Icon src={project.icon_url} />
+          </ColumnLeft>
+          <ColumnRight>
+            <h2>{project.name}</h2>
+            <Markdown>{project.description}</Markdown>
+            {project.users && !!project.users.length && (
+              <>
+                <h3>Participants:</h3>
+                {project.users.map(u => (
+                  <Participant key={u.id} user={u} />
+                ))}
+              </>
+            )}
+          </ColumnRight>
+          <ColumnTag>
+            <p>Projects</p>
+          </ColumnTag>
+        </Columns>
+      </Card>
+    </Link>
   )
 }
 
+const ColumnTag = styled.p`
+  flex-direction: row;
+  color: green
+`
 
 const Icon = styled.img`
   background-color: rgba(0, 0, 0, 0.1);
@@ -74,7 +70,7 @@ const ColumnRight = styled.div`
   flex-basis: 14rem;
 `
 
-function Participant({user}: {user: User}) {
+function Participant({ user }: { user: ProjectUser }) {
   return (
     <ParticipantContainer>
       <ParticipantColumnLeft>
